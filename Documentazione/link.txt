@@ -1,0 +1,5 @@
+https://developers.google.com/classroom/reference/rest
+
+https://guides.rubyonrails.org/form_helpers.html
+
+https://developers.google.com/classroom/quickstart/ruby
