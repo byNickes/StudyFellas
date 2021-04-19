@@ -1,7 +1,11 @@
-https://developers.google.com/classroom/reference/rest
-
+CAPITOLO 6: UPLOADING FILES
 https://guides.rubyonrails.org/form_helpers.html
 
-https://developers.google.com/classroom/quickstart/ruby
-
+LISTA PRECOMPILATA PROVINCE ITALIANE
 https://gist.github.com/LucaRosaldi/3081928
+
+CHAT PER GRUPPO
+https://dev.to/timnans/simple-rails-6-chat-application-with-action-cable-1b6m
+
+API GOOGLE CALENDAR
+https://developers.google.com/calendar/overview
