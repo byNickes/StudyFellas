@@ -12,3 +12,7 @@ https://developers.google.com/calendar/overview
 
 SQLITE DATATYPES
 https://www.sqlite.org/datatype3.html
+
+ACTIVE STORAGE PER FILE
+https://guides.rubyonrails.org/active_storage_overview.html
+https://www.youtube.com/watch?v=tzkezfqW8Ck
