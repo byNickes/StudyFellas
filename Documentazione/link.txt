@@ -9,3 +9,6 @@ https://dev.to/timnans/simple-rails-6-chat-application-with-action-cable-1b6m
 
 API GOOGLE CALENDAR
 https://developers.google.com/calendar/overview
+
+SQLITE DATATYPES
+https://www.sqlite.org/datatype3.html
