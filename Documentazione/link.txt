@@ -16,3 +16,6 @@ https://www.sqlite.org/datatype3.html
 ACTIVE STORAGE PER FILE
 https://guides.rubyonrails.org/active_storage_overview.html
 https://www.youtube.com/watch?v=tzkezfqW8Ck
+
+WHITELIST EMAIL DOMAIN ON OAUTH
+https://stackoverflow.com/questions/23294102/restrict-login-with-google-oauth2-0-to-specific-whitelisted-domain-name-on-ruby
