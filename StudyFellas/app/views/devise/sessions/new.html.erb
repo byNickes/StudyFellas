@@ -1,4 +1,4 @@
-<title>StudyFellas - Log in</title>
+<title>StudyFellas - Accedi</title>
 <br>
 <h1 style="font-weight:bold">Benvenuto su StudyFellas!</h1>
 <br>
@@ -11,13 +11,20 @@
       <%= link_to "Accedi con account istituzionale", omniauth_authorize_path(resource_name, provider), method: :post, :class => "btn btn-primary", :id => "button"%>
     <% end %>
   <% end %>
+
+  <%if flash[:login_error] != nil%>
+    <br><br>
+    <p><span style="color:#75151e; font-weight:bold">Errore: </span><%=flash[:login_error]%></p>
+  <%end%>
 </div>
+
 <br>
 
 <div>
   <hr style="background-color:black">
 </div>
-<br><br>
+
+<br>
 
 <div class="container" id="login_forms">
   <h2 style="font-weight:bold">Accedi come amministratore</h2>

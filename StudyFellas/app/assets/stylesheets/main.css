@@ -5,7 +5,7 @@
 #main_container{
     font-family:sans-serif;
     left: 0%;
-    position: fixed;
+    margin: 0%;
 }
 
 #login_forms{

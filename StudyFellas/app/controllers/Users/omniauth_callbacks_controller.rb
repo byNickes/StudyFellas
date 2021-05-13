@@ -11,6 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       
       sign_in_and_redirect @user, event: :authentication
     else
+      flash[:login_error] = "hai provato a loggare con un account Google non appartenente all'organizzazione studenti.uniroma1.it"
       redirect_to new_user_session_path
     end
 
