@@ -2,7 +2,12 @@
     background-color:#75151e;
 }
 
-div.container{
+#main_container{
     font-family:sans-serif;
-    
+    left: 0%;
+    position: fixed;
+}
+
+#login_forms{
+    margin-left: 0.5%;
 }
