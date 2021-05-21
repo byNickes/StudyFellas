@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, skip:[:passwords, :registrations], :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, skip:[:passwords, :registrations], :controllers => { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # ROUTES PER LOGIN

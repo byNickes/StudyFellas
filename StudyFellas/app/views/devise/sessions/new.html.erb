@@ -45,5 +45,8 @@
         <%= f.submit "Accedi", :class => "btn btn-primary", :id => "button"%>
       </div>
     <% end %>
+    <%if flash[:alert] != nil && flash[:alert] == "Invalid Email or password."%>
+      <p><span style="color:#75151e; font-weight:bold">Errore: </span>Email o password errata</p>
+    <%end%>
   </div>
 </div>
