@@ -1,0 +1,28 @@
+<title>StudyFellas - Esami disponibili</title>
+<br>
+<h1 class="header_pagina">Esami disponibili</h1>
+
+<div class="container-fluid" id ="exams_container">
+    <div class="row">
+        <% @exams.each do |exam| %>
+            <div class="col-auto" style="margin-top:20px;">
+                <div class="col" id="exam_col">
+                    <br>
+                    <span id = "error_style">Esame:</span> <%=exam.subject%>
+                    <br>
+                    <span id = "error_style">Docente:</span> <%=exam.teacher%>
+                    <br><br>
+                    <%=button_to "Elimina", delete_exam_path, :method => :delete, params:{:subject => exam.subject, :teacher => exam.teacher}, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                </div>
+            </div>
+        <%end%>
+    </div>
+</div>
+<br>
+
+<!--FOOTPRINT BUTTONS SCHEMA TO GET THIS VIEW'S RESULT-->
+<div class="container" id="footprint_buttons">
+    <%=button_to "Aggiungi esame", create_exam_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
+<%=button_to "Homepage", root_path,:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+

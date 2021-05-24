@@ -3,6 +3,8 @@
 }
 
 #main_container{
+    min-height: 100%;
+    height: 100%;
     font-family:sans-serif;
     left: 0%;
     margin: 0%;
@@ -10,4 +12,31 @@
 
 #login_forms{
     margin-left: 0.5%;
+}
+
+#error_style{
+    color:#75151e; 
+    font-weight:bold;
+}
+
+#exam_col{
+    text-align: center;
+    align-items:center;
+    width: 500px;
+    height: 150px;
+    border-style: solid;
+}
+
+h1.header_pagina{
+    font-weight:bold;
+}
+
+#exams_container{
+    overflow-y: auto;
+    height: 88vh;
+}
+
+#footprint_buttons{
+    float: left;
+    width: auto;
 }
