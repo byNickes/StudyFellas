@@ -1,0 +1,30 @@
+<title>StudyFellas - Gruppi disponibili</title>
+<br>
+<h1 class="header_pagina">Gruppi disponibili</h1>
+
+<div class="container-fluid" id ="exams_container">
+    <div class="row">
+        <% @groups.each do |group| %>
+            <%exam = Exam.find(group.exam_id)%>
+            <div class="col-auto" style="margin-top:40px;">
+                <div class="col" id="exam_col">
+                    <br>
+                    <span id = "error_style">Descrizione:</span> <%=group.descrizione%>
+                    <br>
+                    <span id = "error_style">MaxMembers:</span> <%=group.max_members%>
+                    <br>
+                    <span id = "error_style">Esame:</span> <%=exam.subject%>
+                    <br>
+                    <span id = "error_style">Docente:</span> <%=exam.teacher%>
+                    <br><br>
+                    <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                </div>
+            </div>
+        <%end%>
+    </div>
+</div>
+<br>
+
+<div class="container" id="footprint_buttons">
+    <%=button_to "Crea Gruppo", new_group_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
