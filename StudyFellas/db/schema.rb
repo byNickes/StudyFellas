@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_150913) do
+ActiveRecord::Schema.define(version: 2021_05_25_180645) do
 
   create_table "exams", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "subject"
     t.string "teacher"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "descrizione"
+    t.integer "max_members"
+    t.integer "exam_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_groups_on_exam_id"
   end
 
   create_table "users", force: :cascade do |t|
