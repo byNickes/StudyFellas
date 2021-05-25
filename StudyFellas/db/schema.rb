@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_180645) do
+ActiveRecord::Schema.define(version: 2021_05_25_184436) do
 
   create_table "exams", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "subject"
-    t.string "teacher"
+    t.string "subject", null: false
+    t.string "teacher", null: false
+    t.index ["subject", "teacher"], name: "index_exams_on_subject_and_teacher", unique: true
   end
 
   create_table "groups", force: :cascade do |t|
