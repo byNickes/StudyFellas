@@ -1,14 +1,16 @@
 class ExamsController < ApplicationController
     def index
+        authorize! :index, Exam, :message => "Non sei autorizzato"
         @exams = Exam.all
     end
 
     def create
-        
+        authorize! :create, Exam, :message => "Non sei autorizzato"
     end
 
     def new
-
+        authorize! :create, Exam, :message => "Non sei autorizzato"
+        
         if !Exam.exists?(subject: params[:subject], teacher: params[:teacher])
             Exam.create(subject: params[:subject], teacher: params[:teacher])
             redirect_to exams_path
@@ -20,6 +22,8 @@ class ExamsController < ApplicationController
     end
 
     def delete
+        authorize! :delete, Exam, :message => "Non sei autorizzato"
+
         Exam.delete_by(:subject=> params[:subject], :teacher=> params[:teacher])
         redirect_to exams_path
     end

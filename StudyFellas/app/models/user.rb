@@ -3,6 +3,40 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
   
+  acts_as_user :roles => [ :user, :admin]
+
+  ## ADMIN METHODS ##
+  def is_admin?
+    return (self.roles_mask & 2) == 2
+  end
+
+  def set_admin
+    self.roles_mask = (self.roles_mask | 2)
+    self.save
+  end
+
+  def unset_admin
+    self.roles_mask = 1
+    self.save
+  end
+  ## ##
+
+
+  ## USER METHODS ##
+  def is_user?
+    return (self.roles_mask & 1) == 1
+  end
+
+  def set_user
+    self.roles_mask = (self.roles_mask | 1)
+    self.save
+  end
+
+# def unset_user  
+# end
+
+  ## ##
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
