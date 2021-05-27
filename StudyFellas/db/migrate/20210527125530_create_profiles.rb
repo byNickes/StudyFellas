@@ -5,8 +5,8 @@ class CreateProfiles < ActiveRecord::Migration[6.1]
       t.string :surname
       t.integer :reg_number
       t.string :province
-      t.text :description, :limit => 1000
-      t.references :user, null: false, foreign_key: true
+      t.text :description
+      t.references :user, null: false
 
       t.timestamps
     end

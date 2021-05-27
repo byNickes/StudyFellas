@@ -13,9 +13,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session[:user_info] = request.env["omniauth.auth"]["info"]
 
       if(!Profile.exists?(:user_id => @user.id))
+        @user.set_user
+        session[:profile_set] = 0
         @user.build_default_profile(session[:user_info], @user.id)
+      else
+        session[:profile_set] = 1
       end
-
+      
       sign_in_and_redirect @user, event: :authentication
     else
       flash[:login_error] = "hai provato a loggare con un account Google non appartenente all'organizzazione studenti.uniroma1.it"

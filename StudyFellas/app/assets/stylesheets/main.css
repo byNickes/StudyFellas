@@ -3,10 +3,12 @@
 }
 
 #main_container{
-    height: 100vh;
+    height: 90vh;
     font-family:sans-serif;
-    left: 0%;
-    margin: 0%;
+    padding-right:0;
+    padding-left:1;
+    margin-right:0;
+    margin-left:0;
 }
 
 #login_forms{
@@ -42,4 +44,13 @@ h1.header_pagina{
 #footprint_buttons{
     float: left;
     width: auto;
+}
+
+.no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+.no-spin {
+    -moz-appearance:textfield !important;
 }
