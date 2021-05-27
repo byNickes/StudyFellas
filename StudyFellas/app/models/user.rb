@@ -1,9 +1,11 @@
 class User < ApplicationRecord
+  has_one :profile
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
   
-  acts_as_user :roles => [ :user, :admin]
+  acts_as_user :roles => [:user, :admin]
 
   ## ADMIN METHODS ##
   def is_admin?
@@ -43,4 +45,9 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
+  def build_default_profile(user_info, user_id)
+    Profile.create!(:user_id => user_id, :name => user_info[:first_name], :surname => user_info[:last_name])
+  end
+
 end
