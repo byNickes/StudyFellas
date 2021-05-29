@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
     
     def edit
         session[:profile_set] = 1
+        @profile = Profile.where(:user_id => current_user.id).first
     end
 
     def update

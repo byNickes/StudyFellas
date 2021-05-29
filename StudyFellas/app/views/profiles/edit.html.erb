@@ -10,22 +10,26 @@
             <div class = "col-auto" id="footprint_buttons">
                 <%= form.label :name, "Nome" %>
                 <br>
-                <%= form.text_field :name, :required => true%>
+                <%= form.text_field :name, :required => true, :value => @profile.name%>
             </div>
             <div class = "col-auto" id="footprint_buttons">
                 <%= form.label :surname, "Cognome" %>
                 <br>
-                <%= form.text_field :surname, :required => true%>
+                <%= form.text_field :surname, :required => true, :value => @profile.surname%>
             </div>
             <div class = "col-auto" id="footprint_buttons">
                 <%= form.label :reg_number, "Matricola" %>
                 <br>
-                <%= form.number_field :reg_number, :required => true, :class => "no-spin"%>
+                <%= form.number_field :reg_number, :required => true, :class => "no-spin", :value => @profile.reg_number%>
             </div>
             <div class = "col-auto" id="footprint_buttons">
-                <%= form.label :province, "Provincia" %>
+                <% if !@profile.province.nil? %>
+                    <%= form.label :province, "Provincia "+ "(già selezionata: "+@profile.province + ")"%>
+                <%else%>
+                    <%= form.label :province, "Provincia"%>
+                <%end%>
                 <br>
-                <select id="province" name="province" style="height:30px;">
+                <select id="province" name="province" style="height:30px;" value=<%=@profile.province%>>
                     <option value="Agrigento">Agrigento</option>
                     <option value="Alessandria">Alessandria</option>
                     <option value="Ancona">Ancona</option>
@@ -138,6 +142,20 @@
                     <option value="Viterbo">Viterbo</option>
                 </select>
             </div>
+            <div class = "col-auto" id="footprint_buttons">
+                <br>
+                <div class = "row" id="image_container">
+                    <div class = "col-auto">
+                        <img src=<%=session[:user_info]["image"]%> alt ="Non è presente una foto profilo" width = "200">
+                    </div>
+                    <div class="col-auto my-auto">
+                        <!--SETTARE PATH CORRETTO-->
+                        <%= button_to "Inserisci foto profilo", root_path,:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                        <%= button_to "Elimina foto profilo", root_path,:method => :get, :class => "btn btn-primary", :id => "button", :style => "margin-top:20px;width:fit-content;" %>
+                        <!--SETTARE PATH CORRETTO-->
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         
@@ -145,7 +163,7 @@
             <div class = "col">
                 <%= form.label :description, "Bio"%>
                 <br>
-                <%= form.text_area :description, :maxlength => 1000, :rows => 7, :cols => 100 %>
+                <%= form.text_area :description, :maxlength => 1000, :rows => 7, :cols => 100, :value => @profile.description %>
             </div>
         </div>
 

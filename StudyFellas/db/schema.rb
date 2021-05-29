@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_175236) do
+ActiveRecord::Schema.define(version: 2021_05_29_120141) do
 
   create_table "exams", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_175236) do
 
   create_table "groups", force: :cascade do |t|
     t.string "descrizione"
-    t.integer "max_members"
+    t.integer "max_members", null: false
     t.integer "exam_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 2021_05_27_175236) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string "name"
-    t.string "surname"
-    t.integer "reg_number"
+    t.string "name", null: false
+    t.string "surname", null: false
+    t.integer "reg_number", null: false
     t.string "province"
     t.text "description", limit: 1000
     t.integer "user_id", null: false

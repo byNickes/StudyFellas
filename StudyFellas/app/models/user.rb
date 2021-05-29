@@ -47,7 +47,9 @@ class User < ApplicationRecord
   end
 
   def build_default_profile(user_info, user_id)
-    Profile.create!(:user_id => user_id, :name => user_info[:first_name], :surname => user_info[:last_name])
+    email = user_info[:email]
+    reg_number = email.split(".")[1].split("@")[0].strip.to_i
+    Profile.create!(:user_id => user_id, :name => user_info[:first_name], :surname => user_info[:last_name], :reg_number => reg_number)
   end
 
 end
