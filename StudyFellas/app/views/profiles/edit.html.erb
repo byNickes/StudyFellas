@@ -5,7 +5,7 @@
 
 <br>
 <div class="container-fluid" id="login_forms">
-    <%= form_with url: "update_profile", method: :post do |form| %>
+    <%= form_for @profile, url: "update_profile", method: :post do |form|%>
         <div class = "row">
             <div class = "col-auto" id="footprint_buttons">
                 <%= form.label :name, "Nome" %>
@@ -146,17 +146,16 @@
                 <br>
                 <div class = "row" id="image_container">
                     <div class = "col-auto">
-                        <img src=<%=session[:user_info]["image"]%> alt ="Non è presente una foto profilo" width = "200">
+                        <%= image_tag @profile.displayed_image, :alt => "Non è presente una foto profilo", :style => "width:200px;"%>
                     </div>
                     <div class="col-auto my-auto">
-                        <!--SETTARE PATH CORRETTO-->
-                        <%= button_to "Inserisci foto profilo", root_path,:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
-                        <%= button_to "Elimina foto profilo", root_path,:method => :get, :class => "btn btn-primary", :id => "button", :style => "margin-top:20px;width:fit-content;" %>
-                        <!--SETTARE PATH CORRETTO-->
+                        <%= form.file_field :image%>
+                        <br><br>
                     </div>
                 </div>
             </div>
         </div>
+
         <br>
         
         <div class = "row" >
@@ -170,9 +169,12 @@
         <div class="row">
             <div class = "col">
                 <%= form.submit "Applica le modifiche", :class => "btn btn-primary", :id => "button"%>
+        <%end%>
+                <div class="container" id="footprint_buttons" style="float:middle;">
+                <%= button_to "Elimina foto profilo", delete_profile_picture_path,:method => :delete, :params => {:profile_id => @profile}, :style => "width:fit-content;", :class => "btn btn-primary", :id => "button" %>
+                </div>
             </div>
         </div>
-    <%end%>
 
     <%if !flash[:already_exists].nil?%>
         <p><span id="error_style">Errore: </span><%=flash[:already_exists]%></p>

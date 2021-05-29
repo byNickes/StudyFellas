@@ -54,3 +54,11 @@ h1.header_pagina{
 .no-spin {
     -moz-appearance:textfield !important;
 }
+
+.image-upload > input
+{
+   display: none;
+}
+.image-upload > label{
+  cursor:pointer;
+}

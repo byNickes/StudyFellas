@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/users/profile', to: 'profiles#show', :as => :profile
   get '/users/profile/edit_profile_form', to: 'profiles#edit', :as => :edit_profile
   post '/users/profile/update_profile', to: 'profiles#update', :as => :update_profile
+  delete '/users/profile/delete_profile_picture', to: 'profiles#delete_profile_picture', :as => :delete_profile_picture
 
   # devise_for:users PER TUTTE LE ROUTES
   resources :groups
