@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
     end
 
     def new
-        @group = Group.new
+        @exams = Exam.all
     end
 
     def create
