@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   post '/users/profile/update_profile', to: 'profiles#update', :as => :update_profile
   delete '/users/profile/delete_profile_picture', to: 'profiles#delete_profile_picture', :as => :delete_profile_picture
 
+  get 'new_belonging', to: 'belongings#new', :as => :new_belonging
+  delete 'delete_belonging', to: 'belongings#destroy', :as => :destroy_belonging
+
   # devise_for:users PER TUTTE LE ROUTES
   resources :groups
 end

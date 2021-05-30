@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_29_125439) do
+ActiveRecord::Schema.define(version: 2021_05_30_002012) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2021_05_29_125439) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "belongings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_belongings_on_group_id"
+    t.index ["user_id"], name: "index_belongings_on_user_id"
+  end
+
   create_table "exams", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -62,7 +71,7 @@ ActiveRecord::Schema.define(version: 2021_05_29_125439) do
     t.string "surname", null: false
     t.integer "reg_number", null: false
     t.string "province"
-    t.text "description", limit: 1000
+    t.text "description"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -86,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_05_29_125439) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "profiles", "users"
+  add_foreign_key "belongings", "groups"
+  add_foreign_key "belongings", "users"
   add_foreign_key "profiles", "users", on_delete: :cascade
 end

@@ -10,10 +10,12 @@ class GroupsController < ApplicationController
     end
 
     def new
-        render html: "nella fase di creazione"
+        @group = Group.new
     end
 
     def create
+        newgroup = Group.create!(exam_id: params[:exam_id], descrizione: params[:description], max_members: params[:max_members])
+        redirect_to new_belonging_path(:user_id => current_user.id, :group_id => newgroup.id)
     end
 
 
