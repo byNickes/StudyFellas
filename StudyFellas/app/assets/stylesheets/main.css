@@ -13,7 +13,10 @@
 
 #login_forms{
     margin-left: 0.5%;
-    overflow-y: auto;
+    overflow: auto;
+    padding-right:0;
+    margin-right:0;
+    margin-left:0;    
     height: calc(100vh - 180px);
     box-sizing: border-box;
 }
@@ -46,6 +49,13 @@ h1.header_pagina{
     width: auto;
 }
 
+#textarea_style{
+    max-width: 100%;
+    min-height: 75px;
+    outline: none;
+    resize: none;
+}
+
 .no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button {
     -webkit-appearance: none !important;
     margin: 0 !important;
@@ -55,10 +65,7 @@ h1.header_pagina{
     -moz-appearance:textfield !important;
 }
 
-.image-upload > input
-{
-   display: none;
-}
-.image-upload > label{
-  cursor:pointer;
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
 }

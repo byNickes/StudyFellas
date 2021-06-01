@@ -162,7 +162,7 @@
             <div class = "col">
                 <%= form.label :description, "Bio"%>
                 <br>
-                <%= form.text_area :description, :maxlength => 1000, :rows => 7, :cols => 100, :value => @profile.description %>
+                <%= form.text_area :description, :maxlength => 1000, :rows => 7, :cols => 100, :value => @profile.description, :id => "textarea_style" %>
             </div>
         </div>
 
@@ -175,10 +175,6 @@
                 </div>
             </div>
         </div>
-
-    <%if !flash[:already_exists].nil?%>
-        <p><span id="error_style">Errore: </span><%=flash[:already_exists]%></p>
-    <%end%>
 </div>
 
 <div class="container" id="footprint_buttons">
