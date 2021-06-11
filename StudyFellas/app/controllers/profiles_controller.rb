@@ -6,6 +6,10 @@ class ProfilesController < ApplicationController
             @profile = Profile.where(:user_id => params[:format]).first
         end
 
+        if(!@profile)
+            @profile = current_user.profile
+        end
+
         belongings = current_user.belongings
         @groups = Array.new
         belongings.each do |b|
@@ -26,7 +30,7 @@ class ProfilesController < ApplicationController
             profile.image.attach(params[:profile][:image])
         end
         profile.update(:name => params[:profile][:name], :surname => params[:profile][:surname], :reg_number => params[:profile][:reg_number], :province => params[:province], :description => params[:profile][:description])
-        redirect_to profile_path
+        redirect_to profile_path(:format => current_user.id)
     end
 
     def delete_profile_picture
