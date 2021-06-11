@@ -1,8 +1,8 @@
 class RequestsController < ApplicationController
 
     def index
-        currentgroup = Group.find(params[:id])
-        @requests = currentgroup.requests
+        @currentgroup = Group.find(params[:id])
+        @requests = @currentgroup.requests
     end
 
     def new
@@ -20,5 +20,6 @@ class RequestsController < ApplicationController
 
     def refuse
         Request.destroy(params[:request_id])
+        redirect_to group_path(params[:group_id])
     end
 end

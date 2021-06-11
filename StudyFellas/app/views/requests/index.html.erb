@@ -5,16 +5,18 @@
 <div class="container-fluid" id ="exams_container">
     <div class="row">
         <% @requests.each do |request| %>
-            <%= user = Group.find(request.user_id)%>
+            <%user = User.find(request.user_id)%>
             <div class="col-auto" style="margin-top:20px;">
                 <div class="col" id="exam_col">
                     <br>
-                    <span id = "error_style">Nome:</span> <%=user.nome%>
-                    <br>
-                    <span id = "error_style">Email:</span> <%=user.email%>
+                    <span id = "error_style"><%=user.profile.name%> <%=user.profile.surname%> </span>
                     <br><br>
-                    <%=button_to "Accetta", accept_request_path, :method => :delete, params:{:request_id => request.id}, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
-                    <%=button_to "Elimina", refuse_request_path, :method => :delete, params:{:request_id => request.id}, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                    <%=button_to "Visita il profilo", profile_path(user), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                    <br><br>
+                    <div class="container" id="footprint_buttons">
+                        <%=button_to "Accetta", accept_request_path, :method => :delete, params:{:request_id => request.id}, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                    </div>
+                    <%=button_to "Elimina", refuse_request_path, :method => :delete, params:{:request_id => request.id, :group_id => @currentgroup.id}, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
                 </div>
             </div>
         <%end%>
@@ -23,4 +25,4 @@
 
 <br>
 <!--FOOTPRINT BUTTONS SCHEMA TO GET THIS VIEW'S RESULT-->
-<%=button_to "Homepage", root_path,:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+<%=button_to "Torna al gruppo", group_path(@currentgroup.id),:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
