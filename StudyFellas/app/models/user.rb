@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :profile
   has_many :belongings
+  has_many :requests
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

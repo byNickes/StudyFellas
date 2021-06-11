@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   get 'new_belonging', to: 'belongings#new', :as => :new_belonging
   delete 'delete_belonging', to: 'belongings#destroy', :as => :destroy_belonging
 
+  get '/groups/:id/requests', to: 'requests#index', :as => :requests
+  get 'new_request', to: 'requests#new', :as => :new_request
+  delete 'accept_request', to: 'requests#accept', :as => :accept_request
+  delete 'refuse_request', to: 'requests#refuse', :as => :refuse_request
+
   # devise_for:users PER TUTTE LE ROUTES
   resources :groups
 end

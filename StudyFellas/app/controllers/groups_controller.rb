@@ -2,7 +2,11 @@ class GroupsController < ApplicationController
 
 
     def index
-        @groups = Group.all
+        belongings = current_user.belongings
+        @groups = Array.new
+        belongings.each do |b|
+            @groups << Group.find(b.group_id)
+        end
     end
 
     def show
