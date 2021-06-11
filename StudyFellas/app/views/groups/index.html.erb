@@ -4,7 +4,8 @@
 
 <div class="container-fluid" id ="exams_container">
     <div class="row">
-        <% @groups.each do |group| %>
+        <% @belongings.each do |belonging| %>
+            <%group = Group.find(belonging.group_id)%>
             <%exam = Exam.find(group.exam_id)%>
             <div class="col-auto" style="margin-top:40px;">
                 <div class="col" id="exam_col">

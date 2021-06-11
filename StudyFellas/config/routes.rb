@@ -21,4 +21,6 @@ Rails.application.routes.draw do
 
   # devise_for:users PER TUTTE LE ROUTES
   resources :groups
+  post '/groups/upload_file', to: 'groups#upload_file', :as => :upload_file
+  delete '/groups/delete_file', to: 'groups#delete_file', :as => :delete_file
 end
