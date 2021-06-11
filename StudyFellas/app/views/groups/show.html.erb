@@ -52,14 +52,28 @@
                     <span id = "error_style"><%=participant.profile.name%> <%=participant.profile.surname%> </span>
                     <br><br>
                     <%=button_to "Visita il profilo", profile_path(participant), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                    <br>
                 </div>
             <%end%>
         </div>
-
     </div>
 </div>
-<br>
+<br><br>
 <div class="container" id="footprint_buttons">
-    <%=button_to "Richieste", requests_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
     <%=button_to "Homepage", root_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Edita gruppo", edit_group_form_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Abbandona gruppo", delete_participant_path, params: {:group_id => @group.id}, :method => :post, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Profilo personale", profile_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Vedi richieste", requests_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Cancella gruppo", delete_group_path(:group_id=>@group.id), :method => :post,:class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
 </div>

@@ -1,6 +1,11 @@
 class ProfilesController < ApplicationController
     def show
-        @profile = current_user.profile
+        if(params[:format] == current_user.id)
+            @profile = current_user.profile
+        else
+            @profile = Profile.where(:user_id => params[:format]).first
+        end
+
         belongings = current_user.belongings
         @groups = Array.new
         belongings.each do |b|

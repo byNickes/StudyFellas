@@ -30,7 +30,7 @@
     text-align: center;
     align-items:center;
     width: 500px;
-    height: 150px;
+    height: fit-content;
     border-style: solid;
 }
 

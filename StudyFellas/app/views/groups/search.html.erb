@@ -1,6 +1,7 @@
-<title>StudyFellas - Gruppi a cui partecipi</title>
+<title>StudyFellas - Risultato ricerca</title>
 <br>
-<h1 class="header_pagina">StudyFellas Homepage</h1>
+<h1 class="header_pagina">Risultato ricerca</h1>
+
 <br>
 <div class="container-fluid" id ="exams_container">
     <div class ="row">
@@ -20,13 +21,13 @@
                     <%= f.submit "Cerca", :class => "btn btn-primary", :id => "button"%>
             </div>
                 <% end %>
-                
     </div>
+
     <br>
-    <h2 class="header_pagina">Gruppi a cui partecipi</h2>
+    <h2 class="header_pagina">Gruppi disponibili</h2>
     <div class="row">
-        <% @belongings.each do |belonging| %>
-            <%group = Group.find(belonging.group_id)%>
+    <%if @groups != nil%>
+        <%@groups.each do |group| %>
             <%exam = Exam.find(group.exam_id)%>
             <div class="col-auto" style="margin-top:40px;">
                 <div class="col" id="exam_col">
@@ -45,6 +46,8 @@
                 </div>
             </div>
         <%end%>
+    <%end%>
+
     </div>
 </div>
 <br>

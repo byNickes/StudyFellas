@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_103859) do
+ActiveRecord::Schema.define(version: 2021_06_11_165600) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_103859) do
     t.integer "exam_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "leader_id", null: false
     t.index ["exam_id"], name: "index_groups_on_exam_id"
   end
 
@@ -70,8 +71,8 @@ ActiveRecord::Schema.define(version: 2021_06_11_103859) do
     t.string "name", null: false
     t.string "surname", null: false
     t.integer "reg_number", null: false
-    t.string "province"
-    t.text "description"
+    t.string "province", null: false
+    t.text "description", limit: 1000
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -106,6 +107,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_103859) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "belongings", "groups"
   add_foreign_key "belongings", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "profiles", "users", on_delete: :cascade
   add_foreign_key "requests", "groups"
   add_foreign_key "requests", "users"
