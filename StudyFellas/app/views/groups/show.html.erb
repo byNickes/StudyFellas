@@ -1,0 +1,64 @@
+<title>StudyFellas - Board del gruppo</title>
+<br>
+<h1 class="header_pagina">Board del gruppo</h1>
+
+<div class = "container-fluid" id="login_forms">
+    <br><br>
+
+    <div class = "row">
+        <div class = "col-md-6">
+            <%exam = Exam.find(@group.exam_id)%>
+            <span id = "error_style"> Esame:</span> <%=exam.subject%>
+            <br>
+            <span id = "error_style">Docente: </span> <%=exam.teacher%>
+            <br>
+            <p id = "error_style">Descrizione:</p> 
+            <textarea disabled rows = "10" cols = "100" id = "textarea_style" style="color: black; font-weight: normal; border: 1px solid;"><%= @group.descrizione %></textarea>
+        </div>
+
+    </div>
+    <br>
+    <div class = "row">
+        <div class = "col-md-6">
+            <h3> File condivisi</h3>
+            <div class = "row-auto">
+                <p>
+                    <%@group.group_files.each do |file|%> 
+                        <div class = "col-md-6">
+                            • <a href=<%=url_for(file)%>><%= file.blob.filename%></a>
+                        </div>
+                        <div class = "col-md-6">
+                            <%= button_to "Rimuovi", delete_file_path,:method => :delete, :params => {:group_id => @group.id, :file => file}, :style => "width:fit-content;", :class => "btn btn-primary", :id => "button" %>
+                        </div>
+                        <br>
+                    <%end%>
+                </p>
+            </div>
+            <hr style = "border-top: 1px solid black;">
+            <%= form_for @group, :url => {:action => "upload_file"}, method: :post do |form|%>
+                <%= form.file_field :group_files%>
+                <%= form.hidden_field(:group_id, value: @group.id) %>
+                <br>
+                <br>
+                <%= form.submit "Carica un file", :class => "btn btn-primary", :id => "button"%>
+            <%end%>
+        </div>
+        <div class = "col-md-6">
+            <h3>Partecipanti</h3>
+            <% @belongings.each do |belonging| %>
+                <%participant = User.find(belonging.user_id)%>
+                <div class="col-auto" style="margin-top:20px;" id="exam_col">
+                    <br>
+                    <span id = "error_style"><%=participant.profile.name%> <%=participant.profile.surname%> </span>
+                    <br><br>
+                    <%=button_to "Visita il profilo", profile_path(participant), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                </div>
+            <%end%>
+        </div>
+
+    </div>
+</div>
+<br>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Homepage", root_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
