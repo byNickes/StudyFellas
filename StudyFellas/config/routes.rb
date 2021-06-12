@@ -31,5 +31,4 @@ Rails.application.routes.draw do
   post '/groups/search', to: 'groups#search', :as => :search_group
   post '/groups/delete_group', to: 'groups#delete_group', :as => :delete_group
   post '/groups/delete_participant', to:'groups#delete_participant', :as => :delete_participant
-  get '/groups/edit_group_form', to:'groups#edit_group_form', :as => :edit_group_form
 end

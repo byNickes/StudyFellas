@@ -37,9 +37,10 @@
                     <div class="container">
                         <span id = "error_style">Lista partecipanti:</span>
                         <%group.belongings.each do |belonging|%>
-                            <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(belonging.user)%>
+                            <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(:profile_id=>belonging.user.profile.id)%>
                         <%end%>
                     </div>
+                    <br>
                     <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
                     <br>
                 </div>
@@ -53,5 +54,5 @@
     <%=button_to "Crea Gruppo", new_group_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
 </div>
 <div class="container" id="footprint_buttons">
-    <%=button_to "Profilo personale", profile_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+    <%=button_to "Profilo personale", profile_path, :params=>{:profile_id=>current_user.profile.id}, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
 </div>

@@ -1,15 +1,12 @@
 class ProfilesController < ApplicationController
     def show
-        if(params[:format] == current_user.id)
+    
+        if(params[:profile_id] == nil || params[:profile_id] == current_user.profile.id)
             @profile = current_user.profile
         else
-            @profile = Profile.where(:user_id => params[:format]).first
+            @profile = Profile.where(:id => params[:profile_id]).first
         end
-
-        if(!@profile)
-            @profile = current_user.profile
-        end
-
+        
         user = User.find(@profile.user_id)
 
         belongings = user.belongings
@@ -21,7 +18,11 @@ class ProfilesController < ApplicationController
     
     def edit
         session[:profile_set] = 1
-        @profile = Profile.where(:user_id => current_user.id).first
+        if(params[:profile_id] != nil)
+            @profile = Profile.where(:id => params[:profile_id]).first
+        else
+            @profile = Profile.where(:user_id => current_user.id).first
+        end
     end
 
     def update

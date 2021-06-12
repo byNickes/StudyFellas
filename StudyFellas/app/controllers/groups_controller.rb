@@ -66,11 +66,11 @@ class GroupsController < ApplicationController
     end
 
     def update
-        group = Group.update(exam_id: params[:exam_id], descrizione: params[:description], max_members: params[:max_members])
-        redirect_to groups_path(group)
+        group = Group.update(exam_id: params[:exam_id], descrizione: params[:description])
+        redirect_to group_path(group)
     end
 
-    def edit_group_form
-    
+    def edit
+        @exams = Exam.all
     end
 end

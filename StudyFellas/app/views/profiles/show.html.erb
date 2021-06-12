@@ -10,7 +10,7 @@
             </div>
             <br>
             <div class = "col-md-3">
-                <%=button_to "Modifica dati personali", edit_profile_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                <%=button_to "Modifica dati personali", edit_profile_path, :params => {:profile_id => @profile.id},:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
             </div>
 
             <div class = "row-auto">
@@ -33,14 +33,21 @@
                         <span id = "error_style">Esame:</span> <%=group.exam.subject%>
                         <br>
                         <span id = "error_style">Docente:</span> <%=group.exam.teacher%>
-                        <br><br>
+                        <br>
+                        <div class="container">
+                            <span id = "error_style">Lista partecipanti:</span>
+                            <%group.belongings.each do |belonging|%>
+                                <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(:profile_id=>belonging.user.profile.id)%>
+                            <%end%>
+                        </div>
+                        <br>
                         <% if group.belongings.find{|b| b.user_id == current_user.id} != nil%>
                             <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
                         <%else%>
                             <% if group.requests.find{|r| r.user_id == current_user.id} != nil%>
                                 <p>Hai già fatto richiesta per entrare in questo gruppo</p>
                             <%else%>
-                                <%=button_to "Fai Richiesta", new_request_path, :method => :get, params: {:group_id => group.id, :user_id => current_user.id}, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                                <%=button_to "Fai richiesta", new_request_path, :method => :get, params: {:group_id => group.id, :user_id => current_user.id}, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
                             <%end%>
                         <%end%>
                         <br>
