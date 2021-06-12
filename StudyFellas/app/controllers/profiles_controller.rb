@@ -10,7 +10,9 @@ class ProfilesController < ApplicationController
             @profile = current_user.profile
         end
 
-        belongings = current_user.belongings
+        user = User.find(@profile.user_id)
+
+        belongings = user.belongings
         @groups = Array.new
         belongings.each do |b|
             @groups.push(Group.find(b.group_id))

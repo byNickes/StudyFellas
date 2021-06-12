@@ -41,7 +41,16 @@
                             <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(belonging.user)%>
                         <%end%>
                     </div>
-                    <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                    <br>
+                    <% if group.belongings.find{|b| b.user_id == current_user.id} != nil%>
+                        <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                    <%else%>
+                        <% if group.requests.find{|r| r.user_id == current_user.id} != nil%>
+                            <p>Hai già fatto richiesta per entrare in questo gruppo</p>
+                        <%else%>
+                            <%=button_to "Fai Richiesta", new_request_path, :method => :get, params: {:group_id => group.id, :user_id => current_user.id}, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                        <%end%>
+                    <%end%>
                     <br>
                 </div>
             </div>
