@@ -1,6 +1,5 @@
 class ProfilesController < ApplicationController
     def show
-    
         if(params[:profile_id] == nil || params[:profile_id] == current_user.profile.id)
             @profile = current_user.profile
         else

@@ -11,7 +11,7 @@
                     <br>
                     <span id = "error_style"><%=user.profile.name%> <%=user.profile.surname%> </span>
                     <br><br>
-                    <%=button_to "Visita il profilo", profile_path(user), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                    <%=button_to "Visita il profilo", profile_path, :params =>{:profile_id => user.profile.id}, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
                     <br><br>
                     <div class="container" id="footprint_buttons">
                         <%=button_to "Accetta", accept_request_path, :method => :delete, params:{:request_id => request.id}, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>

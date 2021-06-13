@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
 
     def search
         exam_searched = Exam.where(:teacher => params[:teacher], :subject =>params[:subject])
+        @province = params[:province]
         if(!exam_searched.empty?)
             @groups = Group.where(:exam_id => exam_searched.first.id)
         else 
@@ -14,9 +15,13 @@ class GroupsController < ApplicationController
     end
 
     def show
-        group_id = params[:id]
-        @group = Group.find(group_id)
-        @belongings = @group.belongings
+        if(params[:id] == "search")
+            redirect_to root_path
+        else
+            group_id = params[:id]
+            @group = Group.find(group_id)
+            @belongings = @group.belongings
+        end
     end
 
     def new
@@ -72,5 +77,16 @@ class GroupsController < ApplicationController
 
     def edit
         @exams = Exam.all
+    end
+
+    def kick_user
+        group = Group.find(params[:group_id])
+        if(params[:user_id].to_i != group.leader_id.to_i)
+            user = User.find(params[:user_id])
+            user.belongings.where(:group_id => params[:group_id]).first.delete
+        else
+            flash[:cant_kick] = "Non puoi kickare questo utente."
+        end
+        redirect_to group_path(group)
     end
 end

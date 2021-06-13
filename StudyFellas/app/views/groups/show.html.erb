@@ -51,7 +51,18 @@
                     <br>
                     <span id = "error_style"><%=participant.profile.name%> <%=participant.profile.surname%> </span>
                     <br><br>
-                    <%=button_to "Visita il profilo", profile_path, :params => {:profile_id=>participant.profile.id}, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                    <div class="row">
+                        <div class ="col">
+                            <%=button_to "Visita il profilo", profile_path, :params => {:profile_id=>participant.profile.id}, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                        </div>
+                        <div class="col">
+                            <%=button_to "Espelli", kick_user_path, :params => {:user_id=>participant.id, :group_id=>@group.id}, :method => :post, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                        </div>
+                    </div>
+                        <br>
+                        <%if(flash[:cant_kick] != nil)%>
+                            <p><span id="error_style">Errore: </span><%=flash[:cant_kick]%></p>
+                        <%end%>
                     <br>
                 </div>
             <%end%>
