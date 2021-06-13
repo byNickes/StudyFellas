@@ -30,7 +30,13 @@
         <br><br>
         <%= form.submit "Aggiungi", :class => "btn btn-primary", :id => "button"%>
     <%end%>
+    <br>
+    <%if flash[:members_error] != nil%>
+        <p><%= flash[:members_error]%></p>
+    <%end%>
 </div>
+
+
 
 <!--FOOTPRINT BUTTONS SCHEMA TO GET THIS VIEW'S RESULT-->
 <div class="container" id="footprint_buttons">

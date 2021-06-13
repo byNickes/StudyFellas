@@ -149,6 +149,8 @@
                     <span id = "error_style">Esame:</span> <%=exam.subject%>
                     <br>
                     <span id = "error_style">Docente:</span> <%=exam.teacher%>
+                    <br>
+                    <span id = "error_style"> Numero Partecipanti:</span> <%=group.belongings.count%>/<%=group.max_members%>
                     <div class="container">
                         <span id = "error_style">Lista partecipanti:</span>
                         <%group.belongings.each do |belonging|%>

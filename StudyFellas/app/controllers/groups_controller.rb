@@ -29,8 +29,13 @@ class GroupsController < ApplicationController
     end
 
     def create
-        newgroup = Group.create!(exam_id: params[:exam_id], descrizione: params[:description], max_members: params[:max_members], leader_id: current_user.id)
-        redirect_to new_belonging_path(:user_id => current_user.id, :group_id => newgroup.id)
+        if (params[:max_members].to_i > 6 || params[:max_members].to_i < 3)
+            flash[:members_error] = "Errore, numero massimo di elementi non valido"
+            redirect_to new_group_path
+        else
+            newgroup = Group.create!(exam_id: params[:exam_id], descrizione: params[:description], max_members: params[:max_members], leader_id: current_user.id)
+            redirect_to new_belonging_path(:user_id => current_user.id, :group_id => newgroup.id)
+        end
     end
 
     def upload_file

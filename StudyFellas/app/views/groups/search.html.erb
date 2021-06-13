@@ -152,10 +152,12 @@
                         <span id = "error_style">Esame:</span> <%=exam.subject%>
                         <br>
                         <span id = "error_style">Docente:</span> <%=exam.teacher%>
+                        <br>
+                        <span id = "error_style"> Numero Partecipanti:</span> <%=group.belongings.count%>/<%=group.max_members%>
                         <div class="container">
                             <span id = "error_style">Lista partecipanti:</span>
                             <%group.belongings.each do |belonging|%>
-                                <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(belonging.user)%>
+                                <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(:profile_id => belonging.user.profile.id)%>
                             <%end%>
                         </div>
                         <br>
@@ -165,7 +167,11 @@
                             <% if group.requests.find{|r| r.user_id == current_user.id} != nil%>
                                 <p>Hai già fatto richiesta per entrare in questo gruppo</p>
                             <%else%>
-                                <%=button_to "Fai Richiesta", new_request_path, :method => :get, params: {:group_id => group.id, :user_id => current_user.id}, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                                <% if group.belongings.count >= group.max_members%>
+                                    <p>Il gruppo è pieno</p>
+                                <% else%>
+                                    <%=button_to "Fai Richiesta", new_request_path, :method => :get, params: {:group_id => group.id, :user_id => current_user.id}, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                                <%end%>
                             <%end%>
                         <%end%>
                         <br>

@@ -32,7 +32,7 @@ class ProfilesController < ApplicationController
             profile.image.attach(params[:profile][:image])
         end
         profile.update(:name => params[:profile][:name], :surname => params[:profile][:surname], :reg_number => params[:profile][:reg_number], :province => params[:province], :description => params[:profile][:description])
-        redirect_to profile_path(:format => current_user.id)
+        redirect_to profile_path(:profile_id => current_user.id)
     end
 
     def delete_profile_picture
