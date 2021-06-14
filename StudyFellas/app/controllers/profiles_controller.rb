@@ -5,6 +5,8 @@ class ProfilesController < ApplicationController
         else
             @profile = Profile.where(:id => params[:profile_id]).first
         end
+
+        #modifica inutile
         
         user = User.find(@profile.user_id)
 
