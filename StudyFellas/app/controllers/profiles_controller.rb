@@ -1,12 +1,10 @@
 class ProfilesController < ApplicationController
     def show
-        if(params[:profile_id] == nil || params[:profile_id] == current_user.profile.id)
+        if(params[:profile_id] == nil || params[:profile_id].to_i == current_user.profile.id)
             @profile = current_user.profile
         else
-            @profile = Profile.where(:id => params[:profile_id]).first
+            @profile = Profile.where(:id => params[:profile_id].to_i).first
         end
-
-        #modifica inutile
         
         user = User.find(@profile.user_id)
 
@@ -34,7 +32,7 @@ class ProfilesController < ApplicationController
             profile.image.attach(params[:profile][:image])
         end
         profile.update(:name => params[:profile][:name], :surname => params[:profile][:surname], :reg_number => params[:profile][:reg_number], :province => params[:province], :description => params[:profile][:description])
-        redirect_to profile_path(:profile_id => current_user.id)
+        redirect_to profile_path(:profile_id => current_user.profile.id)
     end
 
     def delete_profile_picture

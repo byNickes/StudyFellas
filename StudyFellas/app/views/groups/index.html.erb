@@ -173,3 +173,6 @@
 <div class="container" id="footprint_buttons">
     <%=button_to "Profilo personale", profile_path, :params=>{:profile_id=>current_user.profile.id}, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
 </div>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Logout", destroy_user_session_path, :method => :delete, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>

@@ -55,9 +55,11 @@
                         <div class ="col">
                             <%=button_to "Visita il profilo", profile_path, :params => {:profile_id=>participant.profile.id}, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
                         </div>
-                        <div class="col">
-                            <%=button_to "Espelli", kick_user_path, :params => {:user_id=>participant.id, :group_id=>@group.id}, :method => :post, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
-                        </div>
+                        <%if(belonging.user_id != current_user.id)%>
+                            <div class="col">
+                                    <%=button_to "Espelli", kick_user_path, :params => {:user_id=>participant.id, :group_id=>@group.id}, :method => :post, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                            </div>
+                        <%end%>
                     </div>
                         <br>
                         <%if(flash[:cant_kick] != nil)%>
