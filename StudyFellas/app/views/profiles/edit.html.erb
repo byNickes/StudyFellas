@@ -8,6 +8,7 @@
     <%= form_for @profile, url: "update_profile", method: :post do |form|%>
         <div class = "row">
             <div class = "col-auto" id="footprint_buttons">
+                <%= form.hidden_field :user_id, value: @profile.user_id%>
                 <%= form.label :name, "Nome" %>
                 <br>
                 <%= form.text_field :name, :required => true, :value => @profile.name%>
@@ -149,7 +150,7 @@
                         <%= image_tag @profile.displayed_image, :alt => "Non è presente una foto profilo", :style => "width:200px;"%>
                     </div>
                     <div class="col-auto my-auto">
-                        <%= form.file_field :image%>
+                        <%= form.file_field :image, :accept=>".png, .jpeg"%>
                         <br><br>
                     </div>
                 </div>

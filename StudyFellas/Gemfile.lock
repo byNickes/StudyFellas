@@ -253,6 +253,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   canard (~> 0.6.2.pre)
+  cancancan
   capybara (>= 3.26)
   devise
   jbuilder (~> 2.7)

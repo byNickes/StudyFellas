@@ -1,3 +1,3 @@
 Canard::Abilities.for(:admin) do
-  can [:create, :delete, :index], Exam
+  can [:create, :delete, :index, :new], Exam
 end

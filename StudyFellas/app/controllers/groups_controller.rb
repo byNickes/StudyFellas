@@ -32,6 +32,9 @@ class GroupsController < ApplicationController
         if (params[:max_members].to_i > 6 || params[:max_members].to_i < 3)
             flash[:members_error] = "Errore, numero massimo di elementi non valido"
             redirect_to new_group_path
+        elsif !Group.where(:exam_id =>  params[:exam_id], :leader_id=> current_user.id).empty?
+            flash[:members_error] = "Errore, hai già creato un gruppo per questo esame e docente"
+            redirect_to new_group_path
         else
             newgroup = Group.create!(exam_id: params[:exam_id], descrizione: params[:description], max_members: params[:max_members], leader_id: current_user.id)
             redirect_to new_belonging_path(:user_id => current_user.id, :group_id => newgroup.id)

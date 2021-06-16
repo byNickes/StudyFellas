@@ -10,6 +10,7 @@ gem 'omniauth', '~>1.9.1'
 
 #GEMME PER AUTORIZZAZIONE
 gem 'canard', '~> 0.6.2.pre'
+gem 'cancancan'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'

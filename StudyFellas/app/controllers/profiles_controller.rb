@@ -25,9 +25,9 @@ class ProfilesController < ApplicationController
     end
 
     def update
-        params.require(:profile).permit(:name, :surname, :reg_number, :province, :description, :image)
+        params.require(:profile).permit(:name, :surname, :reg_number, :province, :description, :image, :user_id)
 
-        profile = Profile.where(:user_id => current_user.id).first
+        profile = Profile.where(:user_id => params[:profile][:user_id].to_i).first
         if(params[:profile][:image] != nil)
             profile.image.attach(params[:profile][:image])
         end
