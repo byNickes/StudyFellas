@@ -16,6 +16,8 @@ class ProfilesController < ApplicationController
     end
     
     def edit
+        authorize! :edit, Profile, message: "Non sei autorizzato!"
+
         session[:profile_set] = 1
         if(params[:profile_id] != nil)
             @profile = Profile.where(:id => params[:profile_id]).first
@@ -25,6 +27,8 @@ class ProfilesController < ApplicationController
     end
 
     def update
+        authorize! :update, Profile, message: "Non sei autorizzato!"
+        
         params.require(:profile).permit(:name, :surname, :reg_number, :province, :description, :image, :user_id)
 
         profile = Profile.where(:user_id => params[:profile][:user_id].to_i).first
@@ -36,6 +40,8 @@ class ProfilesController < ApplicationController
     end
 
     def delete_profile_picture
+        authorize! :delete_profile_picture, Profile, message: "Non sei autorizzato!"
+
         profile = Profile.find(params[:profile_id])
         profile.image.purge
         redirect_to edit_profile_path
