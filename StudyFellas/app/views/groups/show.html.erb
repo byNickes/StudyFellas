@@ -55,14 +55,16 @@
                         <div class ="col">
                             <%=button_to "Visita il profilo", profile_path, :params => {:profile_id=>participant.profile.id}, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
                         </div>
-                        <%if(belonging.user_id != current_user.id)%>
-                            <div class="col">
-                                    <%=button_to "Espelli", kick_user_path, :params => {:user_id=>participant.id, :group_id=>@group.id}, :method => :post, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
-                            </div>
+                        <%if can? :kick_user, @group %>
+                            <%if belonging.user_id != current_user.id && belonging.user_id != @group.leader_id%>
+                                <div class="col">
+                                        <%=button_to "Espelli", kick_user_path, :params => {:user_id=>participant.id, :group_id=>@group.id}, :method => :post, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                                </div>
+                            <%end%>
                         <%end%>
                     </div>
                         <br>
-                        <%if(flash[:cant_kick] != nil)%>
+                        <%if(flash[:cant_kick] != nil && belonging.user_id == @group.leader_id)%>
                             <p><span id="error_style">Errore: </span><%=flash[:cant_kick]%></p>
                         <%end%>
                     <br>

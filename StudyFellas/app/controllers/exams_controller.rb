@@ -9,7 +9,7 @@ class ExamsController < ApplicationController
     end
 
     def new
-        authorize! :create, Exam, :message => "Non sei autorizzato"
+        authorize! :new, Exam, :message => "Non sei autorizzato"
         
         if !Exam.exists?(subject: params[:subject], teacher: params[:teacher])
             Exam.create(subject: params[:subject], teacher: params[:teacher])

@@ -7,8 +7,5 @@ class BelongingsController < ApplicationController
     end
     redirect_to group_path(params[:group_id])
   end
-
-  def destroy
-  end
   
 end

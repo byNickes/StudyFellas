@@ -29,14 +29,13 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
     
-    #can :edit, Profile
     if user.is_admin?
-      can [:index, :create, :new, :delete], Exam
+      can :manage, :all
 
     elsif user.is_user?
-      can [:edit, :update, :delete_profile_picture], Profile do |profile|
-        profile.user_id == user.id
-      end
+      can [:kick_user], Group, leader_id: user.id
+      can [:edit, :update, :delete_profile_picture], Profile, user_id: user.id
     end
+
   end
 end

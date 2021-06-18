@@ -9,9 +9,11 @@
                 <%= image_tag @profile.displayed_image, :alt => "Non è presente una foto profilo", :style => "width:200px;"%>
             </div>
             <br>
-            <div class = "col-md-3">
-                <%=button_to "Modifica dati personali", edit_profile_path, :params => {:profile_id => @profile.id},:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
-            </div>
+            <%if can? :edit, @profile %>
+                <div class = "col-md-3">
+                    <%=button_to "Modifica dati personali", edit_profile_path, :params => {:profile_id => @profile.id},:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                </div>
+            <%end%>
 
             <div class = "row-auto">
                 <br>

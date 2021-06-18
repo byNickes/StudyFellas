@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   delete '/users/profile/delete_profile_picture', to: 'profiles#delete_profile_picture', :as => :delete_profile_picture
 
   get 'new_belonging', to: 'belongings#new', :as => :new_belonging
-  delete 'delete_belonging', to: 'belongings#destroy', :as => :destroy_belonging
 
   get '/groups/:id/requests', to: 'requests#index', :as => :requests
   get 'new_request', to: 'requests#new', :as => :new_request

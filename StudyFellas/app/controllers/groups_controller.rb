@@ -89,11 +89,13 @@ class GroupsController < ApplicationController
 
     def kick_user
         group = Group.find(params[:group_id])
+        authorize! :kick_user, group, message: "Non sei autorizzato!"
+
         if(params[:user_id].to_i != group.leader_id.to_i)
             user = User.find(params[:user_id])
             user.belongings.where(:group_id => params[:group_id]).first.delete
         else
-            flash[:cant_kick] = "Non puoi kickare questo utente."
+            flash[:cant_kick] = "Non puoi kickare questo utente, cancella il gruppo."
         end
         redirect_to group_path(group)
     end
