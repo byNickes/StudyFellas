@@ -3,6 +3,7 @@ class RequestsController < ApplicationController
     def index
         @currentgroup = Group.find(params[:id])
         @requests = @currentgroup.requests
+        authorize! :index_requests, @currentgroup, message: "Non sei autorizzato!"
     end
 
     def new
@@ -20,6 +21,7 @@ class RequestsController < ApplicationController
         user_id = request.user_id
         group_id = request.group_id
         group = Group.find(group_id)
+        authorize! :accept, group, message: "Non sei autorizzato!"
         Request.destroy(params[:request_id])
         if (group.belongings.count >= group.max_members)
             redirect_to root_path
@@ -29,7 +31,9 @@ class RequestsController < ApplicationController
     end
 
     def refuse
-        Request.destroy(params[:request_id])
+        request = Request.find(params[:request_id])
+        authorize! :index, Group.find(request.group_id), message: "Non sei autorizzato!"
+        Request.destroy(request)
         redirect_to group_path(params[:group_id])
     end
 end

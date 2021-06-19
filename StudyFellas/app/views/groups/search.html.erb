@@ -161,7 +161,7 @@
                             <%end%>
                         </div>
                         <br>
-                        <% if group.belongings.find{|b| b.user_id == current_user.id} != nil%>
+                        <% if group.belongings.find{|b| b.user_id == current_user.id} != nil || current_user.is_admin?%>
                             <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
                         <%else%>
                             <% if group.requests.find{|r| r.user_id == current_user.id} != nil%>

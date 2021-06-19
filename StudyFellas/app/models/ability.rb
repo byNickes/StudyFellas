@@ -33,7 +33,10 @@ class Ability
       can :manage, :all
 
     elsif user.is_user?
-      can [:kick_user], Group, leader_id: user.id
+      can [:kick_user, :accept, :refuse, :index_requests,:delete_group, :update, :edit, :destroy], Group, leader_id: user.id
+      can [:show], Group do |group|
+        group.belongings.where(:user_id => user.id, :group_id => group.id).empty?
+      end
       can [:edit, :update, :delete_profile_picture], Profile, user_id: user.id
     end
 

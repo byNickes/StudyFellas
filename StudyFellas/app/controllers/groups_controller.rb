@@ -21,6 +21,9 @@ class GroupsController < ApplicationController
             group_id = params[:id]
             @group = Group.find(group_id)
             @belongings = @group.belongings
+            if(@belongings.where(:user_id => current_user.id).empty? && !current_user.is_admin?)
+                redirect_to root_path
+            end
         end
     end
 
@@ -44,7 +47,7 @@ class GroupsController < ApplicationController
     def upload_file
         params.require(:group).permit(:group_files, :group_id)
         group = Group.find(params[:group][:group_id])
-        if(params[:group][:group_files] != nil)
+        if(params[:group][:group_files] != nil || !current_user.belongings.where(:group_id => params[:group_id]).empty? || current_user.is_admin)
             group.group_files.attach(params[:group][:group_files])
         end
         redirect_to group_path(group)
@@ -52,12 +55,14 @@ class GroupsController < ApplicationController
 
     def destroy
         group = Group.find(params[:group_id])
+        authorize! :destroy, group, message: "Non sei autorizzato!"
         group.group_files.where(:id=>params[:file]).purge
         redirect_to group_path(group)
     end
 
     def delete_group
         group = Group.find(params[:group_id])
+        authorize! :delete_group, group, message: "Non sei autorizzato!"
         group.group_files.purge
         Belonging.where(:group_id => group.id).delete_all
         group.delete
@@ -79,11 +84,15 @@ class GroupsController < ApplicationController
     end
 
     def update
-        group = Group.update(exam_id: params[:exam_id], descrizione: params[:description])
+        group = Group.find(params[:id])
+        authorize! :update, group, message: "Non sei autorizzato!"
+        group.update(exam_id: params[:exam_id], descrizione: params[:description])
         redirect_to group_path(group)
     end
 
     def edit
+        group = Group.find(params[:id])
+        authorize! :edit, group, message: "Non sei autorizzato!"
         @exams = Exam.all
     end
 
@@ -95,7 +104,7 @@ class GroupsController < ApplicationController
             user = User.find(params[:user_id])
             user.belongings.where(:group_id => params[:group_id]).first.delete
         else
-            flash[:cant_kick] = "Non puoi kickare questo utente, cancella il gruppo."
+            flash[:cant_kick] = "Non puoi kickare questo utente."
         end
         redirect_to group_path(group)
     end
