@@ -177,7 +177,7 @@
     <%=button_to "Logout", destroy_user_session_path, :method => :delete, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
 </div>
 <%if can? :index, Exam%>
-    <div class="container" id="footprint_buttons">
-        <%=button_to "Esami", exams_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+    <div class="container" id="footprint_buttons" style="float:right;">
+        <%=button_to "Gestisci esami disponibili", exams_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
     </div>
 <%end%>

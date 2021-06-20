@@ -23,8 +23,12 @@ class ExamsController < ApplicationController
 
     def delete
         authorize! :delete, Exam, :message => "Non sei autorizzato"
-
-        Exam.delete_by(:subject=> params[:subject], :teacher=> params[:teacher])
+        exam = Exam.where(:subject=> params[:subject], :teacher=> params[:teacher]).first
+        if(Group.where(:exam_id => exam.id).empty?)
+            Exam.delete_by(:subject=> params[:subject], :teacher=> params[:teacher])
+        else
+            flash[:cant_delete_exam] = "Esiste qualche gruppo relativo a questo esame, elimina prima questi gruppi."
+        end
         redirect_to exams_path
     end
 end

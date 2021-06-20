@@ -13,10 +13,15 @@
                     <span id = "error_style">Docente:</span> <%=exam.teacher%>
                     <br><br>
                     <%=button_to "Elimina", delete_exam_path, :method => :delete, params:{:subject => exam.subject, :teacher => exam.teacher}, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                    <br>
                 </div>
             </div>
         <%end%>
     </div>
+    <br>
+    <%if flash[:cant_delete_exam] != nil%>
+        <p><span id="error_style">Errore: </span> <%=flash[:cant_delete_exam]%> </p>
+    <%end%>
 </div>
 
 <br>
