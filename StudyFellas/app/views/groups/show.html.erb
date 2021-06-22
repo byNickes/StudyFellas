@@ -27,9 +27,11 @@
                         <div class = "col-md-6">
                             • <a href=<%=url_for(file)%>><%= file.blob.filename%></a>
                         </div>
-                        <div class = "col-md-6">
-                            <%= button_to "Rimuovi", delete_file_path,:method => :delete, :params => {:group_id => @group.id, :file => file}, :style => "width:fit-content;", :class => "btn btn-primary", :id => "button" %>
-                        </div>
+                        <%if can? :destroy, @group%>
+                            <div class = "col-md-6">
+                                <%= button_to "Rimuovi", delete_file_path,:method => :delete, :params => {:group_id => @group.id, :file => file}, :style => "width:fit-content;", :class => "btn btn-primary", :id => "button" %>
+                            </div>
+                        <%end%>
                         <br>
                     <%end%>
                 </p>

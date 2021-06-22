@@ -33,7 +33,7 @@ class RequestsController < ApplicationController
     def refuse
         request = Request.find(params[:request_id])
         authorize! :index, Group.find(request.group_id), message: "Non sei autorizzato!"
-        Request.destroy(request)
+        Request.destroy(request.id)
         redirect_to group_path(params[:group_id])
     end
 end
