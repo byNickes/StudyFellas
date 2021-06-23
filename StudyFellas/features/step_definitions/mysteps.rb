@@ -1,5 +1,6 @@
 Given 'I am on StudyFellas Homepage' do
     visit 'groups'
+    assert page.has_content?("StudyFellas Homepage")
 end
 
 #sia per gestisci esami disponibili che aggiungi esame
