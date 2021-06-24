@@ -27,8 +27,8 @@ When 'I fill in {string} with {string} and {string} with {string}' do |field1, e
 end
 
 And 'I should see {string} and {string}' do |exam, teacher|
-    assert page.has_content?("Tuttologia")
-    assert page.has_content?("Alberto Angela")
+    assert page.has_content?(exam)
+    assert page.has_content?(teacher)
 end
 
 
@@ -41,10 +41,40 @@ Given 'I am authenticated as student' do
     click_button "Accedi"
 end
 
-When('I select option {string} from element {string} and I fill in {string} with {string} and I select option {string} from element {string}') do |string, string2, string3, string4, string5, string6|
-    pending # Write code here that turns the phrase above into concrete actions
+When('I select option {string} from element {string} and I fill in {string} with {string} and I select option {string} from element {string}') do |exam, selector_exam, description_field, description, maxmembers, selector_max|
+    page.select exam, :from => selector_exam
+    page.select maxmembers, :from => selector_max
+    fill_in(description_field, :with=>description)
 end
 
 Then('I should see {string} and {string} and {string} and {string}') do |string, string2, string3, string4|
+    assert page.has_content?(string)
+    assert page.has_content?(string2)
+    assert page.has_content?(string3)
+    assert page.has_content?(string4)
+end
+
+Given('There is an exam with teacher {string} and subject {string}') do |teacher, subject|
+    Exam.create!(:teacher => teacher, :subject => subject)
+end
+
+Given('There is a group with teacher {string} and subject {string}') do |teacher, subject|
     pending # Write code here that turns the phrase above into concrete actions
 end
+
+Given('I am leader of a group with teacher {string} and subject {string}') do |teacher, subject|
+    pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given('There is a request for the group') do
+    pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('I am on group board') do
+    pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('I should see the member in participants list') do
+    pending # Write code here that turns the phrase above into concrete actions
+end
+  
