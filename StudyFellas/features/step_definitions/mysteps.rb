@@ -77,4 +77,3 @@ end
 Then('I should see the member in participants list') do
     pending # Write code here that turns the phrase above into concrete actions
 end
-  
