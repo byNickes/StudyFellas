@@ -1,10 +1,9 @@
-Feature: Group leader can accept request
+Feature: Group leader can accept group requests
 
-Scenario: Accept group
+Scenario: Accept user from group board
     Given I am authenticated as student
     Given There is an exam with teacher "Alberto Angela" and subject "Tuttologia"
-    Given There is a group with teacher "Alberto Angela" and subject "Tuttologia"
-    Given I am leader of a group with teacher "Alberto Angela" and subject "Tuttologia"
+    Given There is a group for this exam and I am the leader
     Given There is a request for the group
     When I am on group board
     And I press "Vedi richieste"

@@ -1,6 +1,6 @@
 Given 'I am authenticated as admin' do
-    u = User.create!(:email=>"admin@uniroma1.it", :password => "password", :roles_mask => 2)
-    p = Profile.create!(:name => "Magnifico", :surname => "Rettore", :reg_number => 9112001, :province => "Roma", :description => "Sono un admin.", :user_id => u.id)
+    admin = User.create!(:email=>"admin@uniroma1.it", :password => "password", :roles_mask => 2)
+    p = Profile.create!(:name => "Magnifico", :surname => "Rettore", :reg_number => 9112001, :province => "Roma", :description => "Sono un admin.", :user_id => admin.id)
     visit "/"
     fill_in "Email", with: "admin@uniroma1.it"
     fill_in "Password", with: "password"
@@ -12,7 +12,6 @@ Given 'I am on StudyFellas Homepage' do
     assert page.has_content?("StudyFellas Homepage")
 end
 
-#sia per gestisci esami disponibili che aggiungi esame
 When 'I press {string}' do |button|
     click_button(button)
 end
@@ -33,8 +32,8 @@ end
 
 
 Given 'I am authenticated as student' do
-    u = User.create!(:email=>"user@studenti.uniroma1.it", :password => "password", :roles_mask => 1)
-    p = Profile.create!(:name => "Kungfu", :surname => "Panda", :reg_number => 123456, :province => "Roma", :description => "Sono uno studente.", :user_id => u.id)
+    @student = User.create!(:email=>"user@studenti.uniroma1.it", :password => "password", :roles_mask => 1)
+    p = Profile.create!(:name => "Kungfu", :surname => "Panda", :reg_number => 123456, :province => "Roma", :description => "Sono uno studente.", :user_id => @student.id)
     visit "/"
     fill_in "Email", with: "user@studenti.uniroma1.it"
     fill_in "Password", with: "password"
@@ -55,25 +54,27 @@ Then('I should see {string} and {string} and {string} and {string}') do |string,
 end
 
 Given('There is an exam with teacher {string} and subject {string}') do |teacher, subject|
-    Exam.create!(:teacher => teacher, :subject => subject)
+    @exam = Exam.create!(:teacher => teacher, :subject => subject)
 end
 
-Given('There is a group with teacher {string} and subject {string}') do |teacher, subject|
-    pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('I am leader of a group with teacher {string} and subject {string}') do |teacher, subject|
-    pending # Write code here that turns the phrase above into concrete actions
+Given('There is a group for this exam and I am the leader') do
+    @group = Group.create!(:descrizione=> "", :max_members => 3, :exam_id=>@exam.id, :leader_id=>@student.id)
+    Belonging.create!(:user_id => @student.id, :group_id => @group.id)
 end
 
 Given('There is a request for the group') do
-    pending # Write code here that turns the phrase above into concrete actions
+    @requester = User.create!(:email=>"requester@studenti.uniroma1.it", :password => "password", :roles_mask => 1)
+    @requester_p = Profile.create!(:name => "Bill", :surname => "Cosby", :reg_number => 123, :province => "Roma", :description => "Sono un richiedente.", :user_id => @requester.id)
+    Request.create!(:user_id => @requester.id, :group_id => @group.id)
 end
 
 When('I am on group board') do
-    pending # Write code here that turns the phrase above into concrete actions
+    visit "/groups/"+@group.id.to_s
+    assert page.has_content?("Board del gruppo")
 end
 
 Then('I should see the member in participants list') do
-    pending # Write code here that turns the phrase above into concrete actions
+    assert page.has_content?(@requester_p.name)
+    assert page.has_content?(@requester_p.surname)
 end
+  
