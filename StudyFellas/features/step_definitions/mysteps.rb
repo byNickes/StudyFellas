@@ -9,7 +9,7 @@ end
 
 Given 'I am on StudyFellas Homepage' do
     visit "/"
-    assert page.has_content?("StudyFellas Homepage")
+    expect(page).to have_text "StudyFellas Homepage"
 end
 
 When 'I press {string}' do |button|
@@ -17,7 +17,7 @@ When 'I press {string}' do |button|
 end
 
 Then 'I should be on the {string} page' do |string|
-    assert page.has_content?(string)
+    expect(page).to have_text string
 end
 
 When 'I fill in {string} with {string} and {string} with {string}' do |field1, exam, field2, teacher|
@@ -26,8 +26,8 @@ When 'I fill in {string} with {string} and {string} with {string}' do |field1, e
 end
 
 And 'I should see {string} and {string}' do |exam, teacher|
-    assert page.has_content?(exam)
-    assert page.has_content?(teacher)
+    expect(page).to have_text exam
+    expect(page).to have_text teacher
 end
 
 
@@ -47,10 +47,10 @@ When('I select option {string} from element {string} and I fill in {string} with
 end
 
 Then('I should see {string} and {string} and {string} and {string}') do |string, string2, string3, string4|
-    assert page.has_content?(string)
-    assert page.has_content?(string2)
-    assert page.has_content?(string3)
-    assert page.has_content?(string4)
+    expect(page).to have_text string
+    expect(page).to have_text string2
+    expect(page).to have_text string3
+    expect(page).to have_text string4
 end
 
 Given('There is an exam with teacher {string} and subject {string}') do |teacher, subject|
@@ -70,11 +70,11 @@ end
 
 When('I am on group board') do
     visit "/groups/"+@group.id.to_s
-    assert page.has_content?("Board del gruppo")
+    expect(page).to have_text "Board del gruppo"
 end
 
 Then('I should see the member in participants list') do
-    assert page.has_content?(@requester_p.name)
-    assert page.has_content?(@requester_p.surname)
+    expect(page).to have_text @requester_p.name
+    expect(page).to have_text @requester_p.surname
 end
   
