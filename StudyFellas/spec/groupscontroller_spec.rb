@@ -21,5 +21,16 @@ describe GroupsController, type: :controller do
             expect(g_tst).to be_empty
         end
 
+        before do 
+            @participant = User.create!(:email=>"participant@studenti.uniroma1.it", :password => "password", :roles_mask => 1)            
+            Profile.create!(:name => "Federico", :surname => "Chiesa", :reg_number => 14, :province => "Roma", :description => "Sono un partecipante.", :user_id => @participant.id)
+            Belonging.create!(:user_id => @participant.id, :group_id => @group.id)
+        end
+        it "should kick a participant from group" do
+            get :kick_user, :params=>{use_route: 'groups', :group_id => @group.id, :user_id=>@participant.id}
+            b_tst = Belonging.where(:group_id => @group.id, :user_id=>@participant.id)
+            expect(b_tst).to be_empty
+        end
+
     end
 end
