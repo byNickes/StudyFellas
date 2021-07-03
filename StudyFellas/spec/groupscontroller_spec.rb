@@ -31,6 +31,5 @@ describe GroupsController, type: :controller do
             b_tst = Belonging.where(:group_id => @group.id, :user_id=>@participant.id)
             expect(b_tst).to be_empty
         end
-
     end
 end
