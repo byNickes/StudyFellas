@@ -13,7 +13,7 @@ Given 'I am on StudyFellas Homepage' do
 end
 
 When 'I press {string}' do |button|
-    click_button(button)
+    click_button(button, match: :first)
 end
 
 Then 'I should be on the {string} page' do |string|
@@ -57,6 +57,18 @@ Given('There is an exam with teacher {string} and subject {string}') do |teacher
     @exam = Exam.create!(:teacher => teacher, :subject => subject)
 end
 
+Given('There is a group for this exam with another student as leader with name {string} and surname {string}') do |name, surname|
+    @leader = User.create!(:email=>"leader@studenti.uniroma1.it", :password => "password", :roles_mask => 1)
+    p = Profile.create!(:name => name, :surname => surname, :reg_number => 1111111, :province => "Roma", :description => "Sono l'ammiraglio generale Aladeen di Wadiya.", :user_id => @leader.id)
+
+    @group = Group.create!(:descrizione=> "", :max_members => 3, :exam_id=>@exam.id, :leader_id=>@leader.id)
+    Belonging.create!(:user_id => @leader.id, :group_id => @group.id)
+end
+
+Given('I belong to the group') do
+    Belonging.create!(:user_id => @student.id, :group_id => @group.id)
+end
+
 Given('There is a group for this exam and I am the leader') do
     @group = Group.create!(:descrizione=> "", :max_members => 3, :exam_id=>@exam.id, :leader_id=>@student.id)
     Belonging.create!(:user_id => @student.id, :group_id => @group.id)
@@ -73,8 +85,27 @@ When('I am on group board') do
     expect(page).to have_text "Board del gruppo"
 end
 
+When('I am on StudyFellas homepage') do
+    visit "/"
+    expect(page).to have_text "StudyFellas Homepage"
+end
+
 Then('I should see the member in participants list') do
     expect(page).to have_text @requester_p.name
     expect(page).to have_text @requester_p.surname
+end
+
+Then('I should be on the Profilo personale page and i should see {string} and {string}') do |name, surname|
+    expect(page).to have_text name
+    expect(page).to have_text surname
+end
+
+Then('I should be on the Group Board') do 
+    expect(page).to have_text "Board del gruppo"
+end
+
+Then('the exam of the group should have teacher {string} and subject {string}') do |teacher, exam|
+    expect(page).to have_text teacher
+    expect(page).to have_text exam
 end
   
