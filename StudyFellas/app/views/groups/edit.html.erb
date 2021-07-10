@@ -1,0 +1,30 @@
+<title>StudyFellas - Modifica gruppo</title>
+
+<br>
+<h1 class="header_pagina">Modifica gruppo</h1>
+
+<br>
+<div class="container" id="login_forms">
+    <%= form_with url: {action: "update"}, method: :put do |form| %>
+        <%= form.label :exam_id, "Esame" %>
+        <br>
+        <select id="exam_id" name="exam_id" style="height:30px;"%>>
+            <%= @exams.each do |exam| %>
+                <%= name = exam.subject + ', ' + exam.teacher %>
+                <option value = <%= exam.id%> > <%= name%> </option>
+            <%end%>
+        </select>
+        <br>
+        <br>
+        <%= form.label :description, "Descrizione" %>
+        <br>
+        <%= form.text_field :description, :required => true%>
+        <br><br>
+        <%= form.submit "Modifica", :class => "btn btn-primary", :id => "button"%>
+    <%end%>
+</div>
+
+<!--FOOTPRINT BUTTONS SCHEMA TO GET THIS VIEW'S RESULT-->
+<div class="container" id="footprint_buttons">
+    <%=button_to "Torna indietro", groups_path(@group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>

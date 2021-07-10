@@ -1,0 +1,44 @@
+<title>StudyFellas - Aggiungi Gruppo</title>
+
+<br>
+<h1 class="header_pagina">Aggiungi Gruppo</h1>
+
+<br>
+<div class="container" id="login_forms">
+    <%= form_with url: {action: "create"}, method: :post do |form| %>
+        <%= form.label :exam_id, "Esame" %>
+        <br>
+        <select id="exam_id" name="exam_id" style="height:30px;"%>>
+            <%= @exams.each do |exam| %>
+                <%= name = exam.subject + ', ' + exam.teacher %>
+                <option value = <%= exam.id%> > <%= name%> </option>
+            <%end%>
+        </select>
+        <br>
+        <%= form.label :description, "Descrizione" %>
+        <br>
+        <%= form.text_field :description, :required => true%>
+        <br>
+        <%= form.label :max_members, "Massimo numero di membri"%>
+        <br>
+        <select id="max_members" name="max_members" style="height:30px;"%>>
+            <option value= 3 >3</option>
+            <option value= 4 >4</option>
+            <option value= 5 >5</option>
+            <option value= 6 >6</option>
+        </select>
+        <br><br>
+        <%= form.submit "Aggiungi", :class => "btn btn-primary", :id => "button"%>
+    <%end%>
+    <br>
+    <%if flash[:members_error] != nil%>
+        <p><%= flash[:members_error]%></p>
+    <%end%>
+</div>
+
+
+
+<!--FOOTPRINT BUTTONS SCHEMA TO GET THIS VIEW'S RESULT-->
+<div class="container" id="footprint_buttons">
+    <%=button_to "Torna indietro", root_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>

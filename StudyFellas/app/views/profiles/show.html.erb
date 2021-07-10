@@ -1,0 +1,74 @@
+<title>StudyFellas - Profilo personale</title>
+
+<div class = "container-fluid" id="login_forms">
+    <br><br>
+
+    <div class = "row">
+        <div class = "col-md-6">
+            <div class = "col-md-3">
+                <%= image_tag @profile.displayed_image, :alt => "Non è presente una foto profilo", :style => "width:200px;"%>
+            </div>
+            <br>
+            <%if can? :edit, @profile %>
+                <div class = "col-md-3">
+                    <%=button_to "Modifica dati personali", edit_profile_path, :params => {:profile_id => @profile.id},:method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                </div>
+            <%end%>
+
+            <div class = "row-auto">
+                <br>
+                <p id = "error_style">Nome: <span style="color: black; font-weight: normal;"><%= @profile.name %></span></p>
+                <p id = "error_style">Cognome: <span style="color: black; font-weight: normal;"><%= @profile.surname %></span></p>
+                <p id = "error_style">Matricola: <span style="color: black; font-weight: normal;"><%= @profile.reg_number %></span></p>
+                <p id = "error_style">Provincia: <span style="color: black; font-weight: normal;"><%= @profile.province %></span></p>
+                <p id = "error_style">Descrizione:</p> 
+                <textarea disabled rows = "10" cols = "100" id = "textarea_style" style="color: black; font-weight: normal; border: 1px solid;"><%= @profile.description %></textarea>
+            </div>
+        </div>
+
+        <div class = "col-md-6">
+            <h1>Gruppi a cui partecipa:</h1>
+            <% @groups.each do |group| %>
+                <div class="col-auto" style="margin-top:20px;">
+                    <div class="col-auto-m-0" id="exam_col">
+                        <br>
+                        <span id = "error_style">Esame:</span> <%=group.exam.subject%>
+                        <br>
+                        <span id = "error_style">Docente:</span> <%=group.exam.teacher%>
+                        <br>
+                        <span id = "error_style"> Numero Partecipanti:</span> <%=group.belongings.count%>/<%=group.max_members%>
+                        <br>
+                        <div class="container">
+                            <span id = "error_style">Lista partecipanti:</span>
+                            <%group.belongings.each do |belonging|%>
+                                <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(:profile_id=>belonging.user.profile.id)%>
+                            <%end%>
+                        </div>
+                        <br>
+                        <% if group.belongings.find{|b| b.user_id == current_user.id} != nil || current_user.is_admin?%>
+                            <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                        <%else%>
+                            <% if group.requests.find{|r| r.user_id == current_user.id} != nil%>
+                                <p>Hai già fatto richiesta per entrare in questo gruppo</p>
+                            <%else%>
+                                <% if group.belongings.count >= group.max_members%>
+                                    <p>Il gruppo è pieno</p>
+                                <% else%>
+                                    <%=button_to "Fai Richiesta", new_request_path, :method => :get, params: {:group_id => group.id, :user_id => current_user.id}, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                                <%end%>
+                            <%end%>
+                        <%end%>
+                        <br>
+                    </div>
+                </div>
+            <%end%>
+        </div>
+
+    </div>
+</div>
+
+<br><br><br><br>
+
+<div class="container" id="footprint_buttons">
+    <%=button_to "Homepage", root_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>

@@ -1,0 +1,193 @@
+<title>StudyFellas - Risultato ricerca</title>
+<br>
+<h1 class="header_pagina">Risultato ricerca</h1>
+
+<br>
+<div class="container-fluid" id ="exams_container">
+    <div class ="row">
+
+            <div class="col-auto">
+                <%= form_with url: {action: "search"}, method: :post do |f| %>
+                        <%= f.label :esame %><br />
+                        <%= f.text_field :subject, :required => true%>
+            </div>
+
+            <div class="col-auto">
+                    <%= f.label :docente %><br />
+                    <%= f.text_field :teacher, :required => true%>
+            </div>
+
+                        <div class="col-auto">
+                <%= f.label :provincia %><br />
+                <select id="province" name="province" style="height:30px;">
+                    <option value="Agrigento">Agrigento</option>
+                    <option value="Alessandria">Alessandria</option>
+                    <option value="Ancona">Ancona</option>
+                    <option value="Aosta">Aosta</option>
+                    <option value="Arezzo">Arezzo</option>
+                    <option value="Ascoli Piceno">Ascoli Piceno</option>
+                    <option value="Asti">Asti</option>
+                    <option value="Avellino">Avellino</option>
+                    <option value="Bari">Bari</option>
+                    <option value="Barletta-Andria-Trani">Barletta-Andria-Trani</option>
+                    <option value="Belluno">Belluno</option>
+                    <option value="Benevento">Benevento</option>
+                    <option value="Bergamo">Bergamo</option>
+                    <option value="Biella">Biella</option>
+                    <option value="Bologna">Bologna</option>
+                    <option value="Bolzano">Bolzano</option>
+                    <option value="Brescia">Brescia</option>
+                    <option value="Brindisi">Brindisi</option>
+                    <option value="Cagliari">Cagliari</option>
+                    <option value="Caltanissetta">Caltanissetta</option>
+                    <option value="Campobasso">Campobasso</option>
+                    <option value="Carbonia-iglesias">Carbonia-iglesias</option>
+                    <option value="Caserta">Caserta</option>
+                    <option value="Catania">Catania</option>
+                    <option value="Catanzaro">Catanzaro</option>
+                    <option value="Chieti">Chieti</option>
+                    <option value="Como">Como</option>
+                    <option value="Cosenza">Cosenza</option>
+                    <option value="Cremona">Cremona</option>
+                    <option value="Crotone">Crotone</option>
+                    <option value="Cuneo">Cuneo</option>
+                    <option value="Enna">Enna</option>
+                    <option value="Fermo">Fermo</option>
+                    <option value="Ferrara">Ferrara</option>
+                    <option value="Firenze">Firenze</option>
+                    <option value="Foggia">Foggia</option>
+                    <option value="Forlì-Cesena">Forlì-Cesena</option>
+                    <option value="Frosinone">Frosinone</option>
+                    <option value="Genova">Genova</option>
+                    <option value="Gorizia">Gorizia</option>
+                    <option value="Grosseto">Grosseto</option>
+                    <option value="Imperia">Imperia</option>
+                    <option value="Isernia">Isernia</option>
+                    <option value="La spezia">La spezia</option>
+                    <option value="Aquila">L'aquila</option>
+                    <option value="Latina">Latina</option>
+                    <option value="Lecce">Lecce</option>
+                    <option value="Lecco">Lecco</option>
+                    <option value="Livorno">Livorno</option>
+                    <option value="Lodi">Lodi</option>
+                    <option value="Lucca">Lucca</option>
+                    <option value="Macerata">Macerata</option>
+                    <option value="Mantova">Mantova</option>
+                    <option value="Massa-Carrara">Massa-Carrara</option>
+                    <option value="Matera">Matera</option>
+                    <option value="Medio Campidano">Medio Campidano</option>
+                    <option value="Messina">Messina</option>
+                    <option value="Milano">Milano</option>
+                    <option value="Modena">Modena</option>
+                    <option value="Monza e della Brianza">Monza e della Brianza</option>
+                    <option value="Napoli">Napoli</option>
+                    <option value="Novara">Novara</option>
+                    <option value="Nuoro">Nuoro</option>
+                    <option value="Ogliastra">Ogliastra</option>
+                    <option value="Olbia-Tempio">Olbia-Tempio</option>
+                    <option value="Oristano">Oristano</option>
+                    <option value="Padova">Padova</option>
+                    <option value="Palermo">Palermo</option>
+                    <option value="Parma">Parma</option>
+                    <option value="Pavia">Pavia</option>
+                    <option value="Perugia">Perugia</option>
+                    <option value="Pesaro e Urbino">Pesaro e Urbino</option>
+                    <option value="Pescara">Pescara</option>
+                    <option value="Piacenza">Piacenza</option>
+                    <option value="Pisa">Pisa</option>
+                    <option value="Pistoia">Pistoia</option>
+                    <option value="Pordenone">Pordenone</option>
+                    <option value="Potenza">Potenza</option>
+                    <option value="Prato">Prato</option>
+                    <option value="Ragusa">Ragusa</option>
+                    <option value="Ravenna">Ravenna</option>
+                    <option value="Reggio di Calabria">Reggio di Calabria</option>
+                    <option value="Reggio nell'Emilia">Reggio nell'Emilia</option>
+                    <option value="Rieti">Rieti</option>
+                    <option value="Rimini">Rimini</option>
+                    <option value="Roma">Roma</option>
+                    <option value="Rovigo">Rovigo</option>
+                    <option value="Salerno">Salerno</option>
+                    <option value="Sassari">Sassari</option>
+                    <option value="Savona">Savona</option>
+                    <option value="Siena">Siena</option>
+                    <option value="Siracusa">Siracusa</option>
+                    <option value="Sondrio">Sondrio</option>
+                    <option value="Taranto">Taranto</option>
+                    <option value="Teramo">Teramo</option>
+                    <option value="Terni">Terni</option>
+                    <option value="Torino">Torino</option>
+                    <option value="Trapani">Trapani</option>
+                    <option value="Trento">Trento</option>
+                    <option value="Treviso">Treviso</option>
+                    <option value="Trieste">Trieste</option>
+                    <option value="Udine">Udine</option>
+                    <option value="Varese">Varese</option>
+                    <option value="Venezia">Venezia</option>
+                    <option value="Verbano-Cusio-Ossola">Verbano-Cusio-Ossola</option>
+                    <option value="Vercelli">Vercelli</option>
+                    <option value="Verona">Verona</option>
+                    <option value="Vibo valentia">Vibo valentia</option>
+                    <option value="Vicenza">Vicenza</option>
+                    <option value="Viterbo">Viterbo</option>
+                </select>
+            </div>
+
+            <div class="col-auto" style = "margin-top: auto;">
+                    <%= f.submit "Cerca", :class => "btn btn-primary", :id => "button"%>
+            </div>
+                <% end %>
+    </div>
+
+    <br>
+    <h2 class="header_pagina">Gruppi disponibili</h2>
+    <div class="row">
+    <%if @groups != nil%>
+        <%@groups.each do |group| %>
+            <%if(User.find(group.leader_id).profile.province == @province)%>
+                <%exam = Exam.find(group.exam_id)%>
+                <div class="col-auto" style="margin-top:40px;">
+                    <div class="col" id="exam_col">
+                    <br>
+                        <span id = "error_style">Esame:</span> <%=exam.subject%>
+                        <br>
+                        <span id = "error_style">Docente:</span> <%=exam.teacher%>
+                        <br>
+                        <span id = "error_style"> Numero Partecipanti:</span> <%=group.belongings.count%>/<%=group.max_members%>
+                        <div class="container">
+                            <span id = "error_style">Lista partecipanti:</span>
+                            <%group.belongings.each do |belonging|%>
+                                <%= link_to belonging.user.profile.name + " " +belonging.user.profile.surname, profile_path(:profile_id => belonging.user.profile.id)%>
+                            <%end%>
+                        </div>
+                        <br>
+                        <% if group.belongings.find{|b| b.user_id == current_user.id} != nil || current_user.is_admin?%>
+                            <%=button_to "Entra", group_path(group), :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:200px"%>
+                        <%else%>
+                            <% if group.requests.find{|r| r.user_id == current_user.id} != nil%>
+                                <p>Hai già fatto richiesta per entrare in questo gruppo</p>
+                            <%else%>
+                                <% if group.belongings.count >= group.max_members%>
+                                    <p>Il gruppo è pieno</p>
+                                <% else%>
+                                    <%=button_to "Fai Richiesta", new_request_path, :method => :get, params: {:group_id => group.id, :user_id => current_user.id}, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+                                <%end%>
+                            <%end%>
+                        <%end%>
+                        <br>
+                    </div>
+                </div>
+            <%end%>
+        <%end%>
+    <%end%>
+
+    </div>
+</div>
+<br>
+
+<div class="container" id="footprint_buttons">
+    <%=button_to "Crea Gruppo", new_group_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>
+<div class="container" id="footprint_buttons">
+    <%=button_to "Homepage", root_path, :method => :get, :class => "btn btn-primary", :id => "button", :style => "width:fit-content;"%>
+</div>

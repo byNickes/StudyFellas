@@ -1,0 +1,52 @@
+<title>StudyFellas - Accedi</title>
+<br>
+<h1 style="font-weight:bold">Benvenuto su StudyFellas!</h1>
+<br>
+
+<div class="container" id="login_forms" style="height:fit-content;">
+  <h2 style="font-weight:bold">Accedi come studente</h2>
+
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider|%>
+      <%= link_to "Accedi con account istituzionale", omniauth_authorize_path(resource_name, provider), method: :post, :class => "btn btn-primary", :id => "button"%>
+    <% end %>
+  <% end %>
+
+  <%if flash[:login_error] != nil%>
+    <br><br>
+    <p><span style="color:#75151e; font-weight:bold">Errore: </span><%=flash[:login_error]%></p>
+  <%end%>
+</div>
+
+<br>
+
+<div>
+  <hr style="background-color:black">
+</div>
+
+<br>
+
+<div class="container" id="login_forms" style="overflow:hidden;height:fit-content;">
+  <h2 style="font-weight:bold">Accedi come amministratore</h2>
+
+  <div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+      <br>
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= f.submit "Accedi", :class => "btn btn-primary", :id => "button"%>
+      </div>
+    <% end %>
+    <%if flash[:alert] != nil && flash[:alert] == "Invalid Email or password."%>
+      <p><span id="error_style">Errore: </span>Email o password errata</p>
+    <%end%>
+  </div>
+</div>
