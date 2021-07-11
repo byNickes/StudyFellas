@@ -19,10 +19,14 @@ class GroupsController < ApplicationController
             redirect_to root_path
         else
             group_id = params[:id]
-            @group = Group.find(group_id)
-            @belongings = @group.belongings
-            if(@belongings.where(:user_id => current_user.id).empty? && !current_user.is_admin?)
+            if(!Group.exists?(:id=>group_id))
                 redirect_to root_path
+            else
+            @group = Group.find(group_id)
+                @belongings = @group.belongings
+                if(@belongings.where(:user_id => current_user.id).empty? && !current_user.is_admin?)
+                    redirect_to root_path
+                end
             end
         end
     end
